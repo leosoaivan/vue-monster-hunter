@@ -14,14 +14,14 @@
         <div class="small-6 columns">
           <h1 class="text-center">YOU</h1>
           <div class="healthbar">
-            <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="updateHealth">
+            <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" v-bind:style="player">
             </div>
           </div>
         </div>
         <div class="small-6 columns">
           <h1 class="text-center">MONSTER</h1>
           <div class="healthbar">
-            <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="updateHealth">
+            <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" v-bind:style="monster">
             </div>
           </div>
         </div>
@@ -30,7 +30,7 @@
       <template v-if="started == false" >
         <section class="row controls">
           <div class="small-12 columns">
-            <button @click="startGame" id="start-game">START NEW GAME</button>
+            <button id="start-game" @click="startGame">START NEW GAME</button>
           </div>
         </section>
       </template>
@@ -38,10 +38,10 @@
       <template v-if="started == true">
         <section class="row controls">
           <div class="small-12 columns">
-            <button id="attack">ATTACK</button>
+            <button id="attack" @click="attack">ATTACK</button>
             <button id="special-attack">SPECIAL ATTACK</button>
             <button id="heal">HEAL</button>
-            <button @click="endGame" id="give-up">GIVE UP</button>
+            <button id="give-up" @click="endGame">GIVE UP</button>
           </div>
         </section>
       </template>
