@@ -15,6 +15,7 @@
           <h1 class="text-center">YOU</h1>
           <div class="healthbar">
             <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" v-bind:style="player">
+              {{ player.health }}
             </div>
           </div>
         </div>
@@ -22,6 +23,7 @@
           <h1 class="text-center">MONSTER</h1>
           <div class="healthbar">
             <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" v-bind:style="monster">
+              {{ monster.health }}
             </div>
           </div>
         </div>
@@ -38,9 +40,9 @@
       <template v-if="started == true">
         <section class="row controls">
           <div class="small-12 columns">
-            <button id="attack" @click="attack">ATTACK</button>
-            <button id="special-attack">SPECIAL ATTACK</button>
-            <button id="heal">HEAL</button>
+            <button id="attack" @click="attack()">ATTACK</button>
+            <button id="special-attack" @click="attack(5)">SPECIAL ATTACK</button>
+            <button id="heal" @click="heal">HEAL</button>
             <button id="give-up" @click="endGame">GIVE UP</button>
           </div>
         </section>
