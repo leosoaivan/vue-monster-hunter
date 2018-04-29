@@ -15,7 +15,7 @@
           <h1 class="text-center">YOU</h1>
           <div class="healthbar">
             <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" v-bind:style="player">
-              {{ player.health }}
+              {{ healthDisplay(player) }}
             </div>
           </div>
         </div>
@@ -23,7 +23,7 @@
           <h1 class="text-center">MONSTER</h1>
           <div class="healthbar">
             <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" v-bind:style="monster">
-              {{ monster.health }}
+              {{ healthDisplay(monster) }}
             </div>
           </div>
         </div>

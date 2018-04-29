@@ -14,38 +14,45 @@ new Vue({
   methods: {
     startGame: function() {
       this.started = !this.started
-
-      this.player.width = this.fullHealth + '%'
-      this.player.health = this.fullHealth
-
-      this.monster.width = this.fullHealth + '%'
-      this.monster.health = this.fullHealth
+      this.setHealth(this.fullHealth)
     },
     endGame: function() {
       this.started = !this.started
-
-      this.player.width = this.defaultHealth + '%'
-      this.player.health = this.defaultHealth
-
-      this.monster.width = this.defaultHealth + '%'
-      this.monster.health = this.defaultHealth
+      this.setHealth(this.defaultHealth)
     },
     attack: function(multiplier = 1) {
-      playerDamage = Math.floor(Math.random() * 15) + 1
-      monsterDamage = Math.floor(Math.random() * 15) + multiplier
+      let playerDamage = Math.floor(Math.random() * 15) + 1
+      let monsterDamage = Math.floor(Math.random() * 15) + multiplier
       
-      this.player.health -= playerDamage
-      this.monster.health -= monsterDamage
-
-      this.player.width = this.player.health + '%'
-      this.monster.width = this.monster.health + '%'
+      this.subtractHealth(this.player, playerDamage)
+      this.subtractHealth(this.monster, monsterDamage)
     },
     heal: function() {
-      health = Math.floor(Math.random() * 5) + 1
-      playerDamage = Math.floor(Math.random() * 10) + 1
+      let playerDamage = Math.floor(Math.random() * 15) + 1
+      let healing = Math.floor(Math.random() * 10) + 10
       
-      this.player.health += (health + playerDamage)
-      this.player.width = this.player.health + '%'
+      this.player.health += healing
+      this.subtractHealth(this.player, playerDamage)
+    },
+    setHealth: function(health) {
+      this.player.health = health
+      this.player.width = health + '%'
+
+      this.monster.health = health
+      this.monster.width = health + '%'
+    },
+    subtractHealth: function(character, damage) {
+      character.health -= damage
+
+      if(character.health < 0){
+        character.health = 0
+        character.width = 0 + '%'
+      } else {
+        character.width = character.health + '%'
+      }
+    },
+    healthDisplay: function(character) {
+      return character.health
     }
   }
 })
