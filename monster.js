@@ -33,6 +33,7 @@ new Vue({
       let monsterMessage = "Monster hit Player for " + damageToPlayer
 
       this.logs.push([playerMessage, monsterMessage])
+      this.gameResults()
     },
     heal: function() {
       let damageToPlayer = Math.floor(Math.random() * 15) + 1
@@ -45,6 +46,7 @@ new Vue({
       let monsterMessage = "Monster hit Player for " + damageToPlayer
 
       this.logs.push([playerMessage, monsterMessage])
+      this.gameResults()
     },
     setHealth: function(health) {
       this.player.health = health
@@ -75,6 +77,17 @@ new Vue({
     },
     healthDisplay: function(character) {
       return character.health
+    },
+    gameResults: function() {
+      if(this.player.health === 0) {
+        alert("Player has been defeated by Monster!")
+        this.endGame()
+      }
+
+      if(this.monster.health === 0) {
+        alert("Player has defeated Monster!")
+        this.endGame()
+      }
     }
   }
 })
