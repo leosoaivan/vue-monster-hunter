@@ -41,7 +41,7 @@
         <section class="row controls">
           <div class="small-12 columns">
             <button id="attack" @click="attack()">ATTACK</button>
-            <button id="special-attack" @click="attack(5)">SPECIAL ATTACK</button>
+            <button id="special-attack" @click="attack(10)">SPECIAL ATTACK</button>
             <button id="heal" @click="heal">HEAL</button>
             <button id="give-up" @click="endGame">GIVE UP</button>
           </div>
@@ -51,8 +51,12 @@
       <template v-if="started == true">
         <section class="row log">
           <div class="small-12 columns">
-            <ul>
-              <li>
+            <ul v-for="log in logs">
+              <li class="player-turn">
+                {{ log[0] }}
+              </li>
+              <li class="monster-turn">
+                {{ log[1] }}
               </li>
             </ul>
           </div>

@@ -9,7 +9,8 @@ new Vue({
     },
     monster: {
       health: this.width
-    }
+    },
+    logs: []
   },
   methods: {
     startGame: function() {
@@ -21,18 +22,28 @@ new Vue({
       this.setHealth(this.defaultHealth)
     },
     attack: function(multiplier = 1) {
-      let playerDamage = Math.floor(Math.random() * 15) + 1
-      let monsterDamage = Math.floor(Math.random() * 15) + multiplier
+      let damageToPlayer = Math.floor(Math.random() * 15) + 1
+      let damageToMonster = Math.floor(Math.random() * 15) + multiplier
       
-      this.subtractHealth(this.player, playerDamage)
-      this.subtractHealth(this.monster, monsterDamage)
+      this.subtractHealth(this.player, damageToPlayer)
+      this.subtractHealth(this.monster, damageToMonster)
+
+      let playerMessage = "Player hit Monster for " + damageToMonster
+      let monsterMessage = "Monster hit Player for " + damageToPlayer
+
+      this.logs.push([playerMessage, monsterMessage])
     },
     heal: function() {
-      let playerDamage = Math.floor(Math.random() * 15) + 1
+      let damageToPlayer = Math.floor(Math.random() * 15) + 1
       let healing = Math.floor(Math.random() * 10) + 10
       
-      this.player.health += healing
-      this.subtractHealth(this.player, playerDamage)
+      this.addHealth(this.player, healing)
+      this.subtractHealth(this.player, damageToPlayer)
+
+      let playerMessage = "Player healed for " + healing
+      let monsterMessage = "Monster hit Player for " + damageToPlayer
+
+      this.logs.push([playerMessage, monsterMessage])
     },
     setHealth: function(health) {
       this.player.health = health
@@ -49,6 +60,16 @@ new Vue({
         character.width = 0 + '%'
       } else {
         character.width = character.health + '%'
+      }
+    },
+    addHealth: function(character, healing) {
+      character.health += healing
+
+      if(character.health > 100){
+        character.health = 100
+        character.width = 100 + '%'
+      } else {
+        character.width = character.health
       }
     },
     healthDisplay: function(character) {
