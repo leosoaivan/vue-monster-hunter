@@ -20,6 +20,7 @@ new Vue({
     endGame: function() {
       this.started = !this.started
       this.setHealth(this.defaultHealth)
+      this.logs = []
     },
     attack: function(multiplier = 1) {
       let damageToPlayer = Math.floor(Math.random() * 15) + 1

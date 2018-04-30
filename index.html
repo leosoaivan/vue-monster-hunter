@@ -51,7 +51,7 @@
       <template v-if="started == true">
         <section class="row log">
           <div class="small-12 columns">
-            <ul v-for="log in logs">
+            <ul v-for="log in logs.reverse()">
               <li class="player-turn">
                 {{ log[0] }}
               </li>
