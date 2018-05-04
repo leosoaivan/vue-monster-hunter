@@ -14,54 +14,46 @@
         <div class="small-6 columns">
           <h1 class="text-center">YOU</h1>
           <div class="healthbar">
-            <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" v-bind:style="player">
-              {{ healthDisplay(player) }}
+            <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="{ width: playerHealth + '%'}">
+              {{ playerHealth }}
             </div>
           </div>
         </div>
         <div class="small-6 columns">
           <h1 class="text-center">MONSTER</h1>
           <div class="healthbar">
-            <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" v-bind:style="monster">
-              {{ healthDisplay(monster) }}
+            <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="{ width: monsterHealth + '%'}">
+              {{ monsterHealth }}
             </div>
           </div>
         </div>
       </section>
       
-      <template v-if="started == false" >
-        <section class="row controls">
-          <div class="small-12 columns">
-            <button id="start-game" @click="startGame">START NEW GAME</button>
-          </div>
-        </section>
-      </template>
+      <section class="row controls" v-if="!gameIsRunning">
+        <div class="small-12 columns">
+          <button id="start-game" @click="startGame">START NEW GAME</button>
+        </div>
+      </section>
       
-      <template v-if="started == true">
-        <section class="row controls">
-          <div class="small-12 columns">
-            <button id="attack" @click="attack()">ATTACK</button>
-            <button id="special-attack" @click="attack(10)">SPECIAL ATTACK</button>
-            <button id="heal" @click="heal">HEAL</button>
-            <button id="give-up" @click="endGame">GIVE UP</button>
-          </div>
-        </section>
-      </template>
+      <section class="row controls" v-else="gameIsRunning">
+        <div class="small-12 columns">
+          <button id="attack" @click="attack">ATTACK</button>
+          <button id="special-attack" @click="specialAttack">SPECIAL ATTACK</button>
+          <button id="heal" @click="heal">HEAL</button>
+          <button id="give-up" @click="giveUp">GIVE UP</button>
+        </div>
+      </section>
       
-      <template v-if="started == true">
-        <section class="row log">
-          <div class="small-12 columns">
-            <ul v-for="log in logs.reverse()">
-              <li class="player-turn">
-                {{ log[0] }}
-              </li>
-              <li class="monster-turn">
-                {{ log[1] }}
-              </li>
-            </ul>
-          </div>
-        </section>
-      </template>
+      <section class="row log">
+        <div class="small-12 columns">
+          <ul>
+            <li class="player-turn">
+            </li>
+            <li class="monster-turn">
+            </li>
+          </ul>
+        </div>
+      </section>
       
     </div>
   </body>
