@@ -44,12 +44,11 @@
         </div>
       </section>
       
-      <section class="row log">
+      <section class="row log" v-if="turns.length > 0">
         <div class="small-12 columns">
           <ul>
-            <li class="player-turn">
-            </li>
-            <li class="monster-turn">
+            <li v-for="turn in turns" :class="{'player-turn': turn.isPlayer, 'monster-turn': !turn.isPlayer}">
+              {{ turn.text }}
             </li>
           </ul>
         </div>
